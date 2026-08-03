@@ -8,7 +8,7 @@
     "preview": "npm run build -w @louvorflow/shared && npm run build -w @louvorflow/web && concurrently \"npm.cmd run dev -w @louvorflow/api\" \"powershell -NoProfile -Command Start-Sleep -Seconds 4; npm.cmd run preview -w @louvorflow/web\"",
     "build": "npm run build -w @louvorflow/shared && npm run build -w @louvorflow/api && npm run build -w @louvorflow/web",
     "typecheck": "npm run typecheck -w @louvorflow/shared && npm run typecheck -w @louvorflow/api && npm run typecheck -w @louvorflow/web",
-    "start": "node apps/api/dist/index.js"
+    "start": "node apps/api/dist/server.js"
   },
   "workspaces": [
     "apps/*",
