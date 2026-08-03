@@ -1,0 +1,20 @@
+{
+  "name": "louvorflow",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Sistema de cifras, repertorios e modo apresentacao para equipes de louvor e musicos.",
+  "scripts": {
+    "dev": "npm run build -w @louvorflow/shared && concurrently \"npm.cmd run dev -w @louvorflow/api\" \"npm.cmd run dev -w @louvorflow/web\"",
+    "preview": "npm run build -w @louvorflow/shared && npm run build -w @louvorflow/web && concurrently \"npm.cmd run dev -w @louvorflow/api\" \"powershell -NoProfile -Command Start-Sleep -Seconds 4; npm.cmd run preview -w @louvorflow/web\"",
+    "build": "npm run build -w @louvorflow/shared && npm run build -w @louvorflow/api && npm run build -w @louvorflow/web",
+    "typecheck": "npm run typecheck -w @louvorflow/shared && npm run typecheck -w @louvorflow/api && npm run typecheck -w @louvorflow/web"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.4.5"
+  }
+}

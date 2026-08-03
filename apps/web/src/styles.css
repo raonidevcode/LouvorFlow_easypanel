@@ -1,0 +1,5129 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --app-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  --chart-font: Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+html {
+  background: #181a1c;
+}
+
+body {
+  overflow-x: hidden;
+  background: #161819;
+  color: #f4f4f1;
+  font-family: var(--app-font);
+  overscroll-behavior-x: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.appShell {
+  min-height: 100%;
+  background: #181a1b;
+  overscroll-behavior-x: none;
+}
+
+@supports (padding: max(0px)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+  }
+}
+
+.catalogScreen {
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding-bottom: 92px;
+  background: #1b1d1f;
+}
+
+.repertoireScreen {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-bottom: 82px;
+}
+
+.searchScreen {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-bottom: 82px;
+}
+
+.catalogHeader {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 54px 36px 16px;
+}
+
+.catalogHeader h1,
+.simpleHeader h1 {
+  margin: 0 0 30px;
+  text-align: center;
+  font-size: 25px;
+  letter-spacing: 0;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  height: 58px;
+  padding: 0 24px;
+  border-radius: 30px;
+  background: #34373b;
+  color: #96999e;
+}
+
+.searchBox input {
+  width: 100%;
+  margin-left: 12px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #f4f4f1;
+  font-size: 22px;
+}
+
+.searchBox span {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.pills {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 22px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  white-space: nowrap;
+}
+
+.pill {
+  padding: 10px 18px;
+  border-radius: 22px;
+  background: transparent;
+  color: #f1f1ef;
+  font-weight: 700;
+}
+
+.pill.active,
+.primaryButton,
+.floatingRepertoire {
+  background: #3478f6;
+}
+
+.catalogContent {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 24px 24px;
+}
+
+.catalogContent.compact {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.libraryScreen {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-bottom: 82px;
+  background: #1c1e20;
+}
+
+.libraryHeader {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 38px 48px 12px;
+}
+
+.libraryHeader h1 {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.libraryCreateButton {
+  position: absolute;
+  top: 28px;
+  right: 48px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  font-size: 15px;
+}
+
+.libraryCreateButtonPlaceholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.libraryRepertoireContext {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  margin: -10px 0 20px;
+  padding: 0 0 14px;
+  border-bottom: 1px solid #2b2f34;
+  color: #f4f4f1;
+}
+
+.libraryRepertoireIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  margin-right: 12px;
+  border-radius: 8px;
+  background: #24282d;
+  color: #3478f6;
+  font-size: 18px;
+}
+
+.libraryRepertoireText {
+  display: block;
+  min-width: 0;
+}
+
+.libraryRepertoireText strong {
+  display: block;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.libraryRepertoireText small {
+  display: block;
+  margin-top: 3px;
+  color: #a8adb4;
+  font-size: 13px;
+}
+
+.libraryRepertoireContext button {
+  flex: 0 0 auto;
+  margin-left: auto;
+  padding: 8px;
+  background: transparent;
+  color: #f4f4f1;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.librarySearchBox {
+  box-sizing: border-box;
+  width: 100%;
+  height: 58px;
+  border-radius: 30px;
+  padding: 0 24px;
+}
+
+.librarySearchBox input {
+  font-size: 21px;
+}
+
+.libraryTabs {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.libraryTab + .libraryTab {
+  margin-left: 20px;
+}
+
+.libraryTab {
+  min-width: 78px;
+  padding: 8px 15px;
+  border-radius: 18px;
+  background: transparent;
+  color: #f2f2ef;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.libraryTab.active {
+  background: #3478f6;
+  color: #fff;
+}
+
+.repertoireTabs {
+  gap: 16px;
+}
+
+.repertoireTabs .libraryTab + .libraryTab {
+  margin-left: 0;
+}
+
+.libraryContent {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 1320px;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 28px 48px 28px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-color: #3478f6 #24282d;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.libraryContent::-webkit-scrollbar {
+  width: 10px;
+  height: 0;
+}
+
+.libraryContent::-webkit-scrollbar-track {
+  background: #24282d;
+}
+
+.libraryContent::-webkit-scrollbar-thumb {
+  border: 2px solid #24282d;
+  border-radius: 999px;
+  background: #3478f6;
+}
+
+.libraryContent::-webkit-scrollbar-thumb:hover {
+  background: #5a92ff;
+}
+
+.repertoireContent {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-color: #3478f6 #24282d;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.repertoireContent::-webkit-scrollbar {
+  width: 10px;
+  height: 0;
+}
+
+.repertoireContent::-webkit-scrollbar-track {
+  background: #24282d;
+}
+
+.repertoireContent::-webkit-scrollbar-thumb {
+  border: 2px solid #24282d;
+  border-radius: 999px;
+  background: #3478f6;
+}
+
+.repertoireContent::-webkit-scrollbar-thumb:hover {
+  background: #5a92ff;
+}
+
+.repertoireDetailScreen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-bottom: 82px;
+  background: #1b1d1f;
+}
+
+.repertoireDetailHero {
+  position: relative;
+  flex: 0 0 auto;
+  min-height: 220px;
+  padding: 22px 32px 28px;
+  background: #4b4e52;
+  color: #f7f7f3;
+}
+
+.repertoireDetailHero:before {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 36%, rgba(255, 255, 255, 0.12), transparent 34%), linear-gradient(120deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.18));
+  content: "";
+}
+
+.repertoireBackButton,
+.repertoireEditButton {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  color: #fff;
+}
+
+.repertoireBackButton {
+  position: absolute;
+  top: 24px;
+  left: calc(50% - 660px);
+  width: 42px;
+  height: 42px;
+  font-size: 44px;
+  line-height: 34px;
+}
+
+.repertoireEditButton {
+  position: absolute;
+  top: 32px;
+  right: calc(50% - 660px);
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.repertoireHeroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 78px auto 0;
+  text-align: center;
+}
+
+.repertoireCloudIcon {
+  position: absolute;
+  top: 31px;
+  left: 50%;
+  z-index: 1;
+  display: block;
+  margin: 0;
+  color: #3478f6;
+  font-size: 28px;
+  line-height: 1;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.repertoireHeroContent h1 {
+  margin: 0;
+  color: #fff;
+  font-size: 34px;
+  font-weight: 750;
+  line-height: 1.12;
+}
+
+.repertoireHeroContent p {
+  margin: 10px 0 0;
+  color: #e7e7e4;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.repertoireHeroContent small {
+  display: block;
+  margin-top: 8px;
+  color: #c7c9ce;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.repertoireDetailTabs {
+  flex: 0 0 auto;
+  height: 66px;
+  border-bottom: 1px solid #2a2d33;
+  background: #202224;
+  text-align: center;
+}
+
+.repertoireDetailTabs button,
+.repertoireDetailTabs span {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-width: 220px;
+  background: transparent;
+  color: #3478f6;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.repertoireDetailTabs button:after,
+.repertoireDetailTabs span:after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: #3478f6;
+  content: "";
+}
+
+.repertoireSongScroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 12px 40px 66px;
+  scrollbar-color: #3478f6 #24282d;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.repertoireSongScroll::-webkit-scrollbar {
+  width: 10px;
+  height: 0;
+}
+
+.repertoireSongScroll::-webkit-scrollbar-track {
+  background: #24282d;
+}
+
+.repertoireSongScroll::-webkit-scrollbar-thumb {
+  border: 2px solid #24282d;
+  border-radius: 999px;
+  background: #3478f6;
+}
+
+.repertoireSongList {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.repertoireSongRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 112px;
+  padding: 14px 0;
+  border-bottom: 1px solid #2d3035;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.repertoireSongRow.editing {
+  cursor: default;
+}
+
+.repertoireEditAddBar {
+  flex: 0 0 auto;
+  padding: 18px 40px 20px;
+  background: #1b1d1f;
+}
+
+.repertoireEditAddBar .repertoireAddSongsButton {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.repertoireEditAddWrap {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 18px 0 20px;
+}
+
+.repertoireAddSongsButton {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  color: #3478f6;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.repertoireAddSongsButton span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-right: 16px;
+  border-radius: 50%;
+  background: #3478f6;
+  color: #06111f;
+  font-size: 29px;
+  font-weight: 650;
+  line-height: 1;
+}
+
+.repertoireRemoveSongButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  margin-right: 20px;
+  border-radius: 50%;
+  background: #ff453a;
+  color: #111214;
+  font-size: 30px;
+  font-weight: 750;
+  line-height: 0;
+}
+
+.repertoireSongRow .cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  overflow: hidden;
+  border-radius: 6px;
+  font-size: 25px;
+  font-weight: 750;
+  line-height: 1;
+}
+
+.repertoireSongInfo {
+  min-width: 0;
+  flex: 1 1 auto;
+  margin-left: 20px;
+}
+
+.repertoireSongInfo strong {
+  display: block;
+  overflow: hidden;
+  color: #f7f7f3;
+  font-size: 23px;
+  font-weight: 750;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.repertoireSongInfo small,
+.repertoireSongPreset,
+.repertoireSongKey small {
+  color: #96989d;
+  font-size: 20px;
+}
+
+.repertoireSongInfo small {
+  display: block;
+  margin-top: 4px;
+}
+
+.repertoireSongPreset {
+  flex: 0 0 260px;
+}
+
+.repertoireSongKey {
+  flex: 0 0 78px;
+  color: #96989d;
+  text-align: center;
+}
+
+.repertoireSongKey strong,
+.repertoireSongKey small {
+  display: block;
+}
+
+.repertoireSongKey small {
+  margin-top: 5px;
+}
+
+.repertoireSongKey strong {
+  color: #96989d;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.repertoireOrderControls {
+  display: flex;
+  flex: 0 0 52px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-left: 18px;
+}
+
+.repertoireOrderControls button {
+  width: 42px;
+  height: 32px;
+  background: transparent;
+  color: #3478f6;
+  font-size: 34px;
+  line-height: 24px;
+}
+
+.repertoireOrderControls button:disabled {
+  color: rgba(52, 120, 246, 0.24);
+  cursor: default;
+}
+
+.repertoireEmptySongs {
+  max-width: 1320px;
+  margin: 34px auto 0;
+  color: #9b9b9f;
+  font-size: 20px;
+  text-align: center;
+}
+
+.openRepertoireButton {
+  position: fixed;
+  right: auto;
+  bottom: 86px;
+  left: 50%;
+  z-index: 31;
+  flex: 0 0 auto;
+  align-self: center;
+  min-width: 170px;
+  height: 40px;
+  margin: 0;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: #3478f6;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  transform: translateX(-50%);
+}
+
+.librarySongList {
+  width: 100%;
+}
+
+.librarySongRow {
+  display: flex;
+  min-height: 98px;
+  padding: 14px 0;
+}
+
+.librarySongRow .cover {
+  width: 64px;
+  height: 64px;
+  flex: none;
+  align-self: center;
+  border-radius: 6px;
+  font-size: 25px;
+}
+
+.librarySongRow .songMeta {
+  flex: 1 1 auto;
+  margin: 0 24px 0 10px;
+  align-self: center;
+}
+
+.librarySongRow .songMeta strong {
+  font-size: 23px;
+  line-height: 1.15;
+}
+
+.librarySongRow .songMeta small {
+  display: none;
+}
+
+.songAddedBadge {
+  display: none;
+}
+
+.songAddedCorner {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #1c1e20;
+  border-radius: 50%;
+  background: #56ab75;
+  color: #0f1913;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 22px;
+}
+
+.songArtist {
+  overflow: hidden;
+  flex: 0 1 320px;
+  align-self: center;
+  color: #989a9e;
+  font-size: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.librarySongRow .plusButton {
+  align-self: center;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  font-size: 30px;
+}
+
+.songRowActions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.songMenuButton {
+  width: 38px;
+  height: 38px;
+  border: 0;
+  background: transparent;
+  color: #3478f6;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.songActionMenu {
+  position: absolute;
+  z-index: 30;
+  top: 42px;
+  right: 0;
+  width: 210px;
+  overflow: hidden;
+  border: 1px solid #32363b;
+  border-radius: 8px;
+  background: #202326;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
+}
+
+.appShell:not(.legacyVisualMode) .songActionMenu.openUp {
+  top: auto;
+  bottom: 42px;
+}
+
+.songActionMenu button {
+  display: block;
+  width: 100%;
+  padding: 13px 16px;
+  border: 0;
+  background: transparent;
+  color: #f7f7f3;
+  text-align: left;
+  font-size: 16px;
+}
+
+.songActionMenu button:hover {
+  background: #2b2f34;
+}
+
+.songActionMenu button:disabled {
+  color: #7c828a;
+  cursor: default;
+}
+
+.songActionMenu button:disabled:hover {
+  background: transparent;
+}
+
+.songActionMenu .danger {
+  color: #f06f6f;
+}
+
+.emptyLibrary {
+  padding: 70px 0;
+  color: #989a9e;
+  text-align: center;
+  font-size: 22px;
+}
+
+.listFeedback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+  padding: 70px 0;
+  color: #aeb4be;
+  text-align: center;
+  font-size: 20px;
+}
+
+.listMoreFeedback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 72px;
+  color: #aeb4be;
+  font-size: 20px;
+}
+
+.listMoreFeedback .listSpinner {
+  width: 28px;
+  height: 28px;
+}
+
+.listSpinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(47, 121, 255, 0.22);
+  border-top-color: #2f79ff;
+  border-radius: 50%;
+  animation: listSpin 0.8s linear infinite;
+}
+
+.liveRestoreScreen {
+  min-height: 100vh;
+}
+
+.liveRestoreTitle {
+  cursor: default;
+}
+
+.liveRestoreContent {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+  color: #aeb4be;
+  text-align: center;
+  font-size: 20px;
+}
+
+.liveRestoreContent .listSpinner {
+  width: 28px;
+  height: 28px;
+}
+
+.songRestoreScreen {
+  min-height: 100vh;
+}
+
+.songRestoreContent {
+  min-height: calc(100vh - 150px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+  color: #aeb4be;
+  text-align: center;
+  font-size: 20px;
+}
+
+.songRestoreContent .listSpinner {
+  width: 28px;
+  height: 28px;
+}
+
+.repertoireDetailRestoreContent {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 110px;
+  color: #aeb4be;
+  text-align: center;
+  font-size: 20px;
+}
+
+.repertoireDetailRestoreContent .listSpinner {
+  width: 28px;
+  height: 28px;
+}
+
+.listFeedbackButton {
+  border: 0;
+  border-radius: 16px;
+  background: #2f79ff;
+  color: #fff;
+  padding: 10px 18px;
+  font: inherit;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@keyframes listSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.shelfSpaced {
+  margin-top: 50px;
+}
+
+.shelfFavorites .shelfTitle {
+  margin-bottom: 10px;
+}
+
+.shelfTitle,
+.simpleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shelfTitle h2 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.shelfTitle button,
+.linkButton {
+  background: transparent;
+  color: #3478f6;
+  font-size: 22px;
+}
+
+.songGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  gap: 10px 28px;
+}
+
+.songRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  padding: 16px 0;
+  border-bottom: 1px solid #303338;
+}
+
+.cover {
+  position: relative;
+  width: 78px;
+  height: 78px;
+  flex: 0 0 78px;
+  border-radius: 6px;
+  background: #2d3c55;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.cover1,
+.albumCover1 {
+  background: #7fb5c8;
+}
+
+.cover2,
+.albumCover2 {
+  background: #c46b33;
+}
+
+.searchContent .cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  flex-basis: 64px;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.searchContent .songMeta {
+  margin: 0 24px 0 10px;
+}
+
+.songMeta {
+  flex: 1;
+  min-width: 0;
+  margin-left: 20px;
+  margin-right: 12px;
+  text-align: left;
+  background: transparent;
+}
+
+.songMeta strong {
+  display: block;
+  overflow: hidden;
+  color: #fff;
+  font-size: 24px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.appShell:not(.legacyVisualMode) .searchContent .songMeta strong {
+  font-size: 23px;
+}
+
+.legacyVisualMode .searchContent .songMeta strong {
+  font-size: 23px;
+}
+
+.legacyVisualMode .repertoireSongInfo strong {
+  font-size: 23px;
+}
+
+.songMeta small,
+.artistCard small,
+.repertoireCard small {
+  display: block;
+  margin-top: 4px;
+  color: #9b9b9f;
+  font-size: 20px;
+}
+
+.plusButton {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  background: transparent;
+  color: #3478f6;
+  font-size: 34px;
+}
+
+.plusButton:disabled {
+  color: #6f747d;
+  cursor: default;
+  opacity: 0.62;
+}
+
+.artistRail,
+.albumRail {
+  display: flex;
+  gap: 44px;
+  overflow-x: auto;
+  padding: 22px 0 8px;
+}
+
+.artistRail {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.artistList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0;
+  margin: 0 -18px;
+}
+
+.artistList .artistCard {
+  flex: 0 0 140px;
+  margin: 0 2px 34px;
+}
+
+.artistCard {
+  width: 140px;
+  align-self: flex-start;
+  background: transparent;
+  text-align: center;
+}
+
+.artistRail .artistCard {
+  width: 190px;
+  flex-basis: 190px;
+}
+
+.artistPhoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: #d6d5cf;
+  color: #111;
+  font-size: 42px;
+  font-weight: 800;
+}
+
+.artistRail .artistPhoto {
+  width: 168px;
+  height: 168px;
+  font-size: 60px;
+}
+
+.artistPhoto1 {
+  background: #d4a16c;
+}
+
+.artistPhoto2 {
+  background: #f0f0f0;
+}
+
+.artistPhoto3 {
+  background: #6f5a46;
+}
+
+.artistCard strong {
+  display: block;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.albumCover {
+  width: 214px;
+  height: 214px;
+  flex: 0 0 214px;
+  border-radius: 4px;
+  background: #1b2b44;
+  color: #fff;
+  text-align: left;
+}
+
+.albumCover span {
+  display: block;
+  padding: 18px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.accountPage {
+  min-height: 100%;
+  padding: 0 24px 110px;
+  background: #181a1b;
+}
+
+.accountPanel {
+  box-sizing: border-box;
+  width: min(100%, 390px);
+  min-height: calc(100vh - 110px);
+  margin: 0 auto;
+  padding: 150px 0 40px;
+  color: #f7f7f5;
+  text-align: center;
+}
+
+.accountLoadingPanel {
+  min-height: 100vh;
+}
+
+.accountBrandMark {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 12px;
+  border: 1px solid rgba(139, 204, 230, 0.55);
+  border-radius: 8px;
+  color: #8bcce6;
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 42px;
+}
+
+.accountPanel h1 {
+  margin: 0;
+  color: #8bcce6;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.accountHint {
+  margin: 9px 0 30px;
+  color: #c4c6ca;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.accountForm {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  text-align: left;
+}
+
+.accountForm label {
+  display: block;
+  color: #f0f1f2;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.appShell:not(.legacyVisualMode) .accountForm label {
+  font-size: 15px;
+}
+
+.accountLabelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.accountFieldError {
+  color: #ff6b6b;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.accountForm input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 46px;
+  margin-top: 7px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 18px;
+  outline: 0;
+  background: #34383e;
+  color: #f7f7f5;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.accountForm input:focus {
+  border-color: rgba(139, 204, 230, 0.75);
+  background: #393e45;
+}
+
+.accountFieldInvalid input,
+.accountFieldInvalid input:focus {
+  border-color: rgba(255, 107, 107, 0.72);
+  background: #3a3335;
+}
+
+.passwordField {
+  position: relative;
+  display: block;
+}
+
+.passwordField input {
+  padding-right: 58px;
+}
+
+.passwordField button {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  background: transparent;
+  color: #aeb3bc;
+}
+
+.passwordEyeIcon {
+  display: block;
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.accountPrimaryButton {
+  width: 220px;
+  height: 44px;
+  margin: 12px auto 0;
+  border-radius: 22px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.appShell:not(.legacyVisualMode) .accountPrimaryButton,
+.appShell:not(.legacyVisualMode) .accountModeButton {
+  font-size: 15px;
+}
+
+.accountPrimaryButton:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.accountModeButton {
+  display: block;
+  margin: 18px auto 0;
+  background: transparent;
+  color: #8bcce6;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.accountError {
+  margin: -2px 0 0;
+  color: #ff6b6b;
+  font-size: 13px;
+  text-align: center;
+}
+
+.accountSignedPanel {
+  padding-top: 118px;
+}
+
+.accountSessionCard {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 16px;
+  border: 1px solid #2e343a;
+  border-radius: 8px;
+  background: #1b1e20;
+  text-align: left;
+}
+
+.accountSessionCard span,
+.accountSessionCard small {
+  display: block;
+  color: #aeb3bc;
+  font-size: 13px;
+}
+
+.accountSessionCard strong {
+  display: block;
+  margin: 4px 0;
+  color: #f7f7f5;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.accountSyncText {
+  margin: 22px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #aeb4be;
+  font-size: 20px;
+  text-align: center;
+}
+
+.accountSyncText .listSpinner {
+  width: 28px;
+  height: 28px;
+}
+
+.accountLogoutButton {
+  display: block;
+  margin: 18px auto 0;
+  background: transparent;
+  color: #ff6b6b;
+  font-size: 15px;
+}
+
+.masterPage {
+  padding-bottom: 110px;
+}
+
+.masterPanel {
+  width: min(100%, 760px);
+  padding-top: 86px;
+}
+
+.masterSummary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 -6px 18px;
+}
+
+.masterStat {
+  box-sizing: border-box;
+  min-width: 104px;
+  margin: 0 6px 12px;
+  padding: 12px 14px;
+  border: 1px solid #2e343a;
+  border-radius: 8px;
+  background: #1b1e20;
+  text-align: left;
+}
+
+.masterStat span {
+  display: block;
+  color: #aeb3bc;
+  font-size: 15px;
+}
+
+.masterStat strong {
+  display: block;
+  margin-top: 4px;
+  color: #f7f7f5;
+  font-size: 22px;
+  font-weight: 650;
+}
+
+.masterSearchLabel {
+  display: block;
+  margin: 2px 0 12px;
+  color: #f0f1f2;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.masterSearchLabel input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 46px;
+  margin-top: 8px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 18px;
+  outline: 0;
+  background: #34383e;
+  color: #f7f7f5;
+  font-size: 16px;
+}
+
+.masterSearchLabel input:focus {
+  border-color: rgba(139, 204, 230, 0.75);
+  background: #393e45;
+}
+
+.masterUserList {
+  margin-top: 24px;
+  text-align: left;
+}
+
+.masterUserRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.masterUserRowCurrent {
+  padding-left: 18px;
+  padding-right: 14px;
+  border-bottom-color: rgba(52, 120, 246, 0.34);
+  border-radius: 14px;
+  background: rgba(52, 120, 246, 0.08);
+}
+
+.masterUserRowCurrent:before {
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 0;
+  width: 3px;
+  border-radius: 999px;
+  background: #3478f6;
+  content: "";
+}
+
+.masterUserAvatar {
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  margin-right: 14px;
+  border-radius: 8px;
+  background: #2d4164;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 750;
+  line-height: 48px;
+  text-align: center;
+}
+
+.masterUserInfo {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.masterUserInfo strong,
+.masterUserInfo small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.masterUserInfo strong {
+  color: #f7f7f5;
+  font-size: 18px;
+  font-weight: 650;
+}
+
+.masterUserInfo small {
+  margin-top: 3px;
+  color: #aeb3bc;
+  font-size: 14px;
+}
+
+.masterUserBadges {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: 16px;
+}
+
+.masterBadge {
+  display: inline-block;
+  margin-left: 7px;
+  padding: 5px 8px;
+  border: 1px solid rgba(139, 204, 230, 0.22);
+  border-radius: 999px;
+  color: #c4c6ca;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.masterBadgeAccent {
+  color: #8bcce6;
+  border-color: rgba(139, 204, 230, 0.45);
+}
+
+.masterBadgeSuccess {
+  color: #7bd88f;
+  border-color: rgba(123, 216, 143, 0.38);
+}
+
+.masterBadgeDanger {
+  color: #ff8a8a;
+  border-color: rgba(255, 107, 107, 0.4);
+}
+
+.masterRoleControl,
+.masterStatusControl {
+  display: inline-block;
+  margin-left: 7px;
+}
+
+.masterRoleControl span,
+.masterStatusControl span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.masterRoleControl select,
+.masterStatusControl select {
+  height: 30px;
+  padding: 0 26px 0 10px;
+  border: 1px solid rgba(139, 204, 230, 0.22);
+  border-radius: 999px;
+  outline: 0;
+  background: #171a1d;
+  color: #c4c6ca;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.masterStatusControl select.isActive {
+  color: #7bd88f;
+  border-color: rgba(123, 216, 143, 0.38);
+}
+
+.masterStatusControl select.isInactive {
+  color: #ff8a8a;
+  border-color: rgba(255, 107, 107, 0.4);
+}
+
+.masterRoleControl select:focus,
+.masterStatusControl select:focus {
+  border-color: rgba(139, 204, 230, 0.75);
+}
+
+.masterRoleControl select:disabled,
+.masterStatusControl select:disabled {
+  opacity: 0.65;
+}
+
+.masterEmptyText {
+  margin: 22px 0;
+  color: #aeb3bc;
+  font-size: 15px;
+  text-align: center;
+}
+
+.masterListLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 80px;
+  color: #f0f1f2;
+  font-size: 15px;
+  text-align: center;
+}
+
+.masterListError {
+  margin-top: 14px;
+  color: #aeb3bc;
+  font-size: 15px;
+  text-align: center;
+}
+
+.masterListError button {
+  margin-top: 10px;
+  color: #3478f6;
+  background: transparent;
+  font-size: 15px;
+}
+
+.bottomNav {
+  position: fixed;
+  z-index: 30;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 0;
+  height: 76px;
+  padding: 0 24px;
+  background: #111214;
+  border: 0;
+  box-shadow: none;
+}
+
+.bottomNav button {
+  flex: 1;
+  max-width: 180px;
+  background: transparent;
+  color: #f2f2ef;
+  font-size: 18px;
+  text-align: center;
+}
+
+.bottomNav button.active {
+  color: #3478f6;
+}
+
+.bottomNav span {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 28px;
+}
+
+.simpleHeader {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 54px 36px 26px;
+}
+
+.simpleHeader h1 {
+  margin: 0;
+}
+
+.primaryButton {
+  padding: 12px 18px;
+  border-radius: 16px;
+}
+
+.repertoireCard {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  min-height: 92px;
+  padding: 16px 0;
+  border-bottom: 1px solid #2c3034;
+  background: transparent;
+}
+
+.repertoireCardToday {
+  padding-left: 18px;
+  padding-right: 14px;
+  border-bottom-color: rgba(52, 120, 246, 0.34);
+  border-radius: 14px;
+  background: rgba(52, 120, 246, 0.08);
+}
+
+.repertoireCardToday:before {
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 0;
+  width: 3px;
+  border-radius: 999px;
+  background: #3478f6;
+  content: "";
+}
+
+.repertoireCardTitleLine {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.repertoireCard strong {
+  display: block;
+  min-width: 0;
+  color: #fff;
+  font-size: 23px;
+  line-height: 1.15;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.repertoireTodayPill {
+  flex: 0 0 auto;
+  margin-left: 12px;
+  padding: 4px 10px;
+  border: 1px solid rgba(52, 120, 246, 0.52);
+  border-radius: 999px;
+  color: #9fc0ff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.repertoireCardMain {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  align-self: stretch;
+  justify-content: center;
+  min-width: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.repertoireCard button {
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: #3478f6;
+}
+
+.repertoireCard .repertoireCardMain {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.repertoireCardActions {
+  position: relative;
+  flex: 0 0 auto;
+  margin-left: 14px;
+}
+
+.repertoireCard .repertoireMenuButton {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #3478f6;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.repertoireCard .repertoireMenuButton:hover {
+  background: rgba(52, 120, 246, 0.1);
+}
+
+.repertoireActionMenu {
+  top: 42px;
+  right: 0;
+}
+
+.repertoireCard .repertoireActionMenu button {
+  padding: 13px 16px;
+  border-radius: 0;
+  background: transparent;
+}
+
+.repertoireCard .repertoireActionMenu button:hover {
+  background: #2b2f34;
+}
+
+@media (max-width: 1384px) {
+  .repertoireBackButton {
+    left: 20px;
+  }
+
+  .repertoireEditButton {
+    right: 32px;
+  }
+}
+
+.repertoireEditorScreen {
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding-bottom: 48px;
+  background: #1a1c1d;
+}
+
+.repertoireEditorTopbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr) auto minmax(90px, 1fr);
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1120px;
+  min-height: 88px;
+  margin: 0 auto;
+  padding: 14px 40px;
+  background: rgba(26, 28, 29, 0.96);
+}
+
+.repertoireEditorTopbar:after {
+  position: absolute;
+  right: 50%;
+  bottom: 0;
+  width: 100vw;
+  height: 1px;
+  background: #2c3034;
+  content: "";
+  transform: translateX(50%);
+}
+
+.repertoireEditorTopbar h1 {
+  margin: 0;
+  color: #f7f7f3;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.textActionButton {
+  justify-self: start;
+  padding: 10px 0;
+  border-radius: 0;
+  background: transparent;
+  color: #3478f6;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.textActionButton.done {
+  justify-self: end;
+  font-weight: 700;
+}
+
+.repertoireForm {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 92px 40px 0;
+}
+
+.repertoireField {
+  display: block;
+  color: #f7f7f3;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.repertoireField + .repertoireField,
+.repertoireFieldGrid + .repertoireField {
+  margin-top: 30px;
+}
+
+.repertoireFieldGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 22px;
+  margin-top: 30px;
+}
+
+.repertoireFieldGrid .repertoireField {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  line-height: 1.2;
+}
+
+.repertoireFieldGrid .repertoireField + .repertoireField {
+  margin-top: 0;
+}
+
+.repertoireField input,
+.repertoireField textarea {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  outline: 0;
+  background: #34383d;
+  color: #f7f7f3;
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.repertoireField input {
+  height: 58px;
+  padding: 0 18px;
+}
+
+.repertoireField textarea {
+  min-height: 132px;
+  resize: vertical;
+  padding: 18px;
+  line-height: 1.45;
+}
+
+.repertoireField input:focus,
+.repertoireField textarea:focus {
+  border-color: rgba(52, 120, 246, 0.8);
+  background: #383c42;
+}
+
+.repertoireField input::placeholder,
+.repertoireField textarea::placeholder {
+  color: #9b9b9f;
+}
+
+.editorScreen {
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 28px 24px 48px;
+  background: #1a1c1d;
+}
+
+.editorTopbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto 30px;
+}
+
+.editorTopbar h1 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.editorLayout {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.editorPanel,
+.editorPreview {
+  max-width: 100%;
+  min-width: 0;
+  border: 1px solid #34383d;
+  border-radius: 8px;
+  background: #1b1d1f;
+}
+
+.editorPanel {
+  flex: 0 0 520px;
+  padding: 22px;
+}
+
+.editorPreview {
+  flex: 1;
+  min-width: 0;
+  padding: 22px;
+}
+
+.fieldGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.fieldGrid label,
+.chartInputLabel {
+  display: block;
+  color: #c7c9ce;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.chartInputLabel > span {
+  display: block;
+}
+
+.fieldGrid label {
+  width: calc(50% - 8px);
+}
+
+.fieldGrid input,
+.fieldGrid select,
+.chartCodeEditor {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  border: 1px solid #3b3f45;
+  border-radius: 8px;
+  outline: 0;
+  background: #303338;
+  color: #f4f4f1;
+  font-weight: 500;
+}
+
+.fieldGrid input,
+.fieldGrid select {
+  height: 52px;
+  padding: 0 15px;
+  font-size: 16px;
+}
+
+.chartInputLabel {
+  margin-top: 20px;
+}
+
+.chartCodeEditor {
+  height: 390px;
+  min-height: 390px;
+  overflow: auto;
+  box-sizing: border-box;
+  font-family: var(--chart-font);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+  text-transform: none;
+}
+
+.chartCodeTextarea {
+  padding: 16px;
+  resize: none;
+  white-space: pre;
+}
+
+.chartCodeEditor .cm-editor {
+  height: 100%;
+  background: transparent;
+  color: #f4f4f1;
+  font-family: var(--chart-font);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+  text-transform: none;
+}
+
+.chartCodeEditor .cm-focused {
+  outline: 0;
+}
+
+.chartCodeEditor .cm-scroller {
+  overflow: auto;
+  font-family: var(--chart-font);
+}
+
+.chartCodeEditor .cm-content {
+  min-height: 100%;
+  padding: 16px;
+  caret-color: #f4f4f1;
+  text-transform: none;
+}
+
+.chartCodeEditor .cm-line {
+  padding: 0;
+  text-transform: none;
+}
+
+.editorActions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.secondaryButton {
+  padding: 12px 18px;
+  border-radius: 16px;
+  background: #303338;
+  color: #f4f4f1;
+}
+
+.previewHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.previewHeader h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.previewHeader span,
+.emptyPreview {
+  color: #9b9b9f;
+}
+
+.fatalError {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  background: #151718;
+  color: #f7f7f3;
+  font-family: var(--app-font);
+  box-sizing: border-box;
+}
+
+.fatalError span {
+  color: #aeb4be;
+  word-break: break-word;
+}
+
+.previewChart .sectionCard {
+  display: block;
+  min-width: 720px;
+  margin-bottom: 18px;
+}
+
+.sectionCard.preserveLayout .sectionLines,
+.sectionCard.preserveLayout .chordLine,
+.sectionCard.preserveLayout .chordText,
+.sectionCard.preserveLayout .instrumentalText,
+.sectionCard.preserveLayout .lyric {
+  font-family: var(--chart-font);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.22;
+}
+
+.sectionCard.preserveLayout .sectionLines,
+.sectionCard.preserveLayout .chordLine,
+.sectionCard.preserveLayout .chordText,
+.sectionCard.preserveLayout .instrumentalText {
+  overflow: visible;
+}
+
+.sectionCard.preserveLayout .chordLine {
+  min-height: 0;
+  margin-bottom: 4px;
+}
+
+.sectionCard.preserveLayout .chordLine.blankLine,
+.chordLine.blankLine {
+  min-height: 26px;
+}
+
+.sectionCard.preserveLayout .chordText,
+.sectionCard.preserveLayout .instrumentalText {
+  color: #f70;
+  font-weight: bold;
+  min-height: 20px;
+}
+
+.sectionCard.preserveLayout .lyric {
+  max-width: none;
+  min-height: 20px;
+}
+
+.previewChart {
+  height: 618px;
+  overflow: auto;
+  padding-right: 6px;
+  padding-bottom: 6px;
+}
+
+.emptyPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 390px;
+  overflow: auto;
+  border: 1px dashed #34383d;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.songScreen {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 28px 24px 112px;
+  background: #1a1c1d;
+}
+
+.songChartViewport {
+  min-width: 0;
+}
+
+.repertoireLiveScreen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 18px 24px 42px;
+  background: #1a1c1d;
+}
+
+.repertoireLiveScreen.emptyLive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9b9b9f;
+  font-size: 20px;
+}
+
+.liveTopbar {
+  position: sticky;
+  top: 0;
+  z-index: 12;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  align-items: center;
+  width: 100%;
+  max-width: 1720px;
+  min-height: 56px;
+  margin: -18px auto 0;
+  padding: 14px 0 8px;
+  background: rgba(26, 28, 29, 0.96);
+}
+
+.liveBackButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  width: 48px;
+  height: 48px;
+  line-height: 1;
+}
+
+.liveSongTitleButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  min-width: 0;
+  max-width: 760px;
+  width: 100%;
+  background: transparent;
+  color: #f7f7f3;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.liveSongTitleButton span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.liveSongTitleButton small {
+  margin-left: 8px;
+  color: #a8adb4;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.liveActions {
+  display: flex;
+  gap: 8px;
+  justify-self: end;
+}
+
+.liveMoreButton {
+  background: #30343a;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+.liveActions .keyButton,
+.liveActions .liveMoreButton,
+.songActions .keyButton {
+  font-weight: 650;
+}
+
+.sectionRail.liveSectionRail {
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 1720px;
+  margin: 40px auto 30px;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding-bottom: 10px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sectionRail.liveSectionRail::-webkit-scrollbar {
+  display: none;
+}
+
+.liveChartGrid {
+  padding-bottom: 28px;
+}
+
+.liveChartViewport {
+  min-width: 0;
+}
+
+.livePageDots {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 12px;
+  z-index: 14;
+  display: inline-flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 28px;
+  margin: auto auto 0;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(26, 28, 29, 0.88);
+}
+
+.livePageDots button {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  pointer-events: auto;
+}
+
+.livePageDots button.active {
+  background: #f7f7f3;
+}
+
+.livePickerOverlay {
+  position: fixed;
+  z-index: 30;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 64px;
+  background: rgba(0, 0, 0, 0.58);
+}
+
+.liveSongPicker {
+  display: flex;
+  flex-direction: column;
+  width: 520px;
+  max-width: calc(100vw - 36px);
+  max-height: min(72vh, 640px);
+  overflow: hidden;
+  border: 1px solid #2d3035;
+  border-radius: 8px;
+  background: #1b1d1f;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.48);
+}
+
+.liveSongPicker header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 16px 18px 14px;
+  border-bottom: 1px solid #2d3035;
+  background: linear-gradient(90deg, rgba(52, 120, 246, 0.08), rgba(52, 120, 246, 0));
+}
+
+.liveSongPicker header .cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex-basis: 46px;
+  flex-shrink: 0;
+  margin-right: 14px;
+  border: 1px solid rgba(52, 120, 246, 0.18);
+  font-size: 19px;
+  line-height: 1;
+}
+
+.liveSongPicker header strong {
+  display: block;
+  color: #f7f7f3;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.liveSongPicker header small {
+  display: block;
+  margin-top: 3px;
+  color: #9ba1aa;
+  font-size: 13px;
+}
+
+.liveSongPickerList {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-color: #3478f6 #24282d;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.liveSongPickerList::-webkit-scrollbar {
+  width: 10px;
+}
+
+.liveSongPickerList::-webkit-scrollbar-track {
+  background: #24282d;
+}
+
+.liveSongPickerList::-webkit-scrollbar-thumb {
+  border: 2px solid #24282d;
+  border-radius: 999px;
+  background: #3478f6;
+}
+
+.liveSongPickerList button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 82px;
+  padding: 12px 18px 12px 15px;
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid #2c3034;
+  background: transparent;
+  text-align: left;
+}
+
+.liveSongPickerList button.active {
+  border-left-color: #3478f6;
+  background: #172130;
+  box-shadow: inset 0 0 0 1px rgba(52, 120, 246, 0.18);
+}
+
+.liveSongPickerList .cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex-basis: 46px;
+  flex-shrink: 0;
+  font-size: 19px;
+  line-height: 1;
+}
+
+.livePickerInfo {
+  min-width: 0;
+  flex: 1 1 auto;
+  margin-left: 14px;
+}
+
+.livePickerInfo strong {
+  display: block;
+  overflow: hidden;
+  color: #f7f7f3;
+  font-size: 18px;
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.livePickerInfo small {
+  display: block;
+  margin-top: 2px;
+  color: #8f949c;
+  font-size: 13px;
+}
+
+.livePickerKey {
+  flex: 0 0 54px;
+  color: #aeb4bd;
+  text-align: center;
+}
+
+.livePickerKey strong,
+.livePickerKey small {
+  display: block;
+}
+
+.livePickerKey small {
+  margin-top: 5px;
+}
+
+.songTopbar {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  align-items: center;
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto;
+}
+
+.songTopbar h1 {
+  justify-self: center;
+  min-width: 0;
+  margin: 0;
+  max-width: 760px;
+  width: 100%;
+  font-size: 25px;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.songTopbar > .iconButton.plain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  width: 48px;
+  height: 48px;
+  line-height: 1;
+}
+
+.songActions {
+  justify-self: end;
+}
+
+.songActions {
+  display: flex;
+  gap: 12px;
+  min-width: 52px;
+  justify-content: flex-end;
+}
+
+.iconButton,
+.keyButton {
+  min-width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #303338;
+  color: #f5f5f2;
+  font-size: 24px;
+}
+
+.iconButton.plain {
+  background: transparent;
+  font-size: 46px;
+}
+
+.sectionRail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  margin: 30px 0 34px;
+  overflow: hidden;
+  padding-bottom: 8px;
+}
+
+.songStickyHeader {
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto 34px;
+}
+
+.songStickyHeader > .sectionRail {
+  width: 100%;
+  max-width: 1720px;
+  margin: 30px auto 0;
+}
+
+.sectionDot,
+.sectionBadge {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border: 3px solid #277b81;
+  border-radius: 50%;
+  background: transparent;
+  color: #f5f5f2;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.sectionBadge {
+  background: #1b1d1f;
+}
+
+.sectionDot.chorus,
+.sectionBadge.chorus {
+  border-color: #a24d18;
+}
+
+.sectionDot.verse,
+.sectionBadge.verse {
+  border-color: #5548a7;
+}
+
+.sectionDot.bridge,
+.sectionBadge.bridge {
+  border-color: #9a485c;
+}
+
+.sectionDot.preChorus,
+.sectionBadge.preChorus {
+  border-color: #d6a61f;
+}
+
+.sectionDot.grandPause,
+.sectionBadge.grandPause {
+  border-color: #1f6f3a;
+}
+
+.sectionDot.instrumental,
+.sectionBadge.instrumental,
+.sectionDot.turnaround,
+.sectionBadge.turnaround {
+  border-color: #78b85a;
+}
+
+.sectionDot.interlude,
+.sectionBadge.interlude,
+.sectionDot.ramp,
+.sectionBadge.ramp {
+  border-color: #994034;
+}
+
+.sectionDot.repeat,
+.sectionBadge.repeat {
+  border-color: #a24d18;
+}
+
+.sectionDot.active {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.sectionDot.active::after {
+  position: absolute;
+  right: 7px;
+  bottom: -11px;
+  left: 7px;
+  height: 3px;
+  border-radius: 999px;
+  background: #277b81;
+  content: "";
+}
+
+.sectionDot.active.chorus::after {
+  background: #a24d18;
+}
+
+.sectionDot.active.verse::after {
+  background: #5548a7;
+}
+
+.sectionDot.active.bridge::after {
+  background: #9a485c;
+}
+
+.sectionDot.active.preChorus::after {
+  background: #d6a61f;
+}
+
+.sectionDot.active.grandPause::after {
+  background: #1f6f3a;
+}
+
+.sectionDot.active.instrumental::after,
+.sectionDot.active.turnaround::after {
+  background: #78b85a;
+}
+
+.sectionDot.active.interlude::after,
+.sectionDot.active.ramp::after {
+  background: #994034;
+}
+
+.sectionDot.active.repeat::after {
+  background: #a24d18;
+}
+
+.chartGrid {
+  column-count: 2;
+  column-gap: 28px;
+  max-width: 1720px;
+  margin: 0 auto;
+  padding-top: 0;
+}
+
+.sectionCard {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  padding: 16px 22px 20px;
+  margin: 0 0 22px;
+  border: 1px solid #34383d;
+  border-radius: 8px;
+  background: #1b1d1f;
+  break-inside: avoid;
+  overflow: hidden;
+  page-break-inside: avoid;
+}
+
+.sectionCard.active.chorus {
+  border-color: #a24d18;
+}
+
+.sectionCard.active.intro,
+.sectionCard.active.ending {
+  border-color: #277b81;
+}
+
+.sectionCard.active.verse {
+  border-color: #5548a7;
+}
+
+.sectionCard.active.bridge {
+  border-color: #9a485c;
+}
+
+.sectionCard.active.preChorus {
+  border-color: #d6a61f;
+}
+
+.sectionCard.active.grandPause {
+  border-color: #1f6f3a;
+}
+
+.sectionCard.active.instrumental,
+.sectionCard.active.turnaround {
+  border-color: #78b85a;
+}
+
+.sectionCard.active.interlude,
+.sectionCard.active.ramp {
+  border-color: #994034;
+}
+
+.sectionCard.active.repeat {
+  border-color: #a24d18;
+}
+
+.sectionCard header {
+  position: static;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: auto;
+  min-height: 48px;
+  margin: 0 0 20px;
+}
+
+.sectionCard h2 {
+  min-width: 0;
+  margin: 0 14px;
+  padding: 0 8px;
+  background: transparent;
+  font-size: 22px;
+  overflow: hidden;
+  letter-spacing: 5px;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sectionCard small {
+  min-width: 80px;
+  margin-left: auto;
+  color: #87888d;
+  font-size: 18px;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sectionLines {
+  overflow: hidden;
+  padding-top: 0;
+}
+
+.chordLine {
+  position: relative;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 56px;
+  padding-top: 0;
+  font-size: 24px;
+  overflow: hidden;
+}
+
+.chordLine.instrumental {
+  min-height: 36px;
+  padding-top: 0;
+  color: #f7f7f3;
+  font-family: var(--chart-font);
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.instrumentalText {
+  display: block;
+  max-width: 100%;
+  min-height: 26px;
+  margin: 0;
+  overflow: hidden;
+  color: #f7f7f3;
+  font-family: var(--chart-font);
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1;
+  white-space: pre;
+}
+
+.chordText {
+  display: block;
+  max-width: 100%;
+  min-height: 26px;
+  margin: 0;
+  overflow: hidden;
+  color: #f7f7f3;
+  font-family: var(--chart-font);
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1;
+  white-space: pre;
+}
+
+.lyric {
+  max-width: 100%;
+  width: 100%;
+  max-width: calc(100vw - 64px);
+  overflow: visible;
+  color: #f3f3f0;
+  line-height: 1.2;
+  white-space: pre;
+}
+
+.floatingRepertoire {
+  position: fixed;
+  right: 50%;
+  bottom: 18px;
+  z-index: 12;
+  display: block;
+  min-width: 170px;
+  width: auto;
+  height: 40px;
+  margin: 0;
+  padding: 0 22px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  transform: translateX(50%);
+}
+
+.modalOverlay {
+  position: fixed;
+  z-index: 32;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.68);
+}
+
+.confirmOverlay {
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.confirmDialog {
+  width: 420px;
+  max-width: 100%;
+  border: 1px solid #32363b;
+  border-radius: 8px;
+  background: #181a1c;
+  padding: 28px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.44);
+}
+
+.confirmDialog h2 {
+  margin: 0 0 14px;
+  font-size: 24px;
+  font-weight: 650;
+}
+
+.confirmDialog p {
+  margin: 0;
+  color: #f7f7f3;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.confirmDialog small {
+  display: block;
+  margin-top: 10px;
+  color: #a7a9ad;
+  font-size: 15px;
+}
+
+.confirmActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.dangerButton {
+  min-width: 104px;
+  height: 46px;
+  border-radius: 12px;
+  background: #d84f4f;
+  color: #fff;
+  font-size: 16px;
+}
+
+.settingsPanel {
+  position: absolute;
+  top: 92px;
+  right: 28px;
+  width: 600px;
+  max-width: calc(100% - 56px);
+  max-height: calc(100vh - 120px);
+  overflow: hidden;
+  border-radius: 10px;
+  background: #18191b;
+  box-shadow: 0 18px 80px rgba(0, 0, 0, 0.45);
+}
+
+.settingsPanel header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 28px;
+  border-bottom: 1px solid #34383d;
+}
+
+.settingsPanel h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.settingsPanel header button {
+  background: transparent;
+  color: #3478f6;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.settingsBody {
+  max-height: calc(100vh - 230px);
+  overflow-y: auto;
+  padding: 26px 28px 28px;
+}
+
+.settingsBody label {
+  display: block;
+  margin: 0 0 10px;
+  color: #d8d9dc;
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.settingsBody label strong {
+  display: inline-block;
+  margin-left: 8px;
+  text-transform: none;
+}
+
+.settingsBody label.keySummaryLabel {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.settingsBody label.keySummaryLabel strong {
+  display: inline-block;
+  margin: 0 0 0 8px;
+  white-space: nowrap;
+}
+
+.selectLike {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 68px;
+  margin-bottom: 24px;
+  padding: 0 24px;
+  border-radius: 8px;
+  background: #3a3d42;
+  font-size: 21px;
+  font-weight: 650;
+}
+
+.keyPicker,
+.accidentals {
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 10px;
+  border-radius: 7px;
+  background: #34373c;
+}
+
+.keyPicker button,
+.accidentals button {
+  flex: 1;
+  min-height: 60px;
+  background: transparent;
+  color: #a5a6aa;
+  font-size: 22px;
+  font-weight: 650;
+}
+
+.keyPicker button.active,
+.accidentals button.active {
+  background: #3478f6;
+  color: #fff;
+}
+
+.accidentals {
+  gap: 10px;
+  background: transparent;
+}
+
+.accidentals button {
+  border-radius: 7px;
+  background: #34373c;
+}
+
+@media (max-width: 1180px) {
+  .songGrid {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+
+  .librarySongRow {
+    min-height: 92px;
+  }
+
+  .librarySongRow .cover {
+    width: 60px;
+    height: 60px;
+  }
+
+  .searchContent .cover {
+    width: 60px;
+    height: 60px;
+    flex-basis: 60px;
+  }
+
+  .librarySongRow .songMeta strong {
+    font-size: 22px;
+  }
+
+  .appShell:not(.legacyVisualMode) .searchContent .songMeta strong {
+    font-size: 22px;
+  }
+
+  .legacyVisualMode .searchContent .songMeta strong {
+    font-size: 22px;
+  }
+
+  .legacyVisualMode .repertoireSongInfo strong {
+    font-size: 22px;
+  }
+
+  .songArtist {
+    flex-basis: 260px;
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 900px) {
+  html,
+  body,
+  #root {
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  .appShell {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .catalogScreen {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .catalogScreen:not(.libraryScreen):not(.repertoireScreen):not(.searchScreen),
+  .repertoireLiveScreen {
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .songScreen {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .songStickyHeader {
+    position: relative;
+    z-index: 20;
+    -webkit-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 14px 12px 12px;
+    background: #1a1c1d;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .songChartViewport {
+    position: relative;
+    z-index: 1;
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 22px 12px 118px;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .songStickyHeader .songTopbar {
+    position: static;
+    grid-template-columns: 40px minmax(0, 1fr) 46px;
+    gap: 8px;
+    min-height: 52px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+  }
+
+  .songStickyHeader .songTopbar > .iconButton.plain {
+    justify-self: start;
+    width: 40px;
+    min-width: 40px;
+    height: 42px;
+  }
+
+  .songStickyHeader .songTopbar h1 {
+    align-self: center;
+    justify-self: start;
+    max-width: calc(100vw - 118px);
+    font-size: 20px;
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  .songStickyHeader .songActions {
+    align-self: center;
+  }
+
+  .songStickyHeader > .sectionRail {
+    position: static;
+    flex-wrap: nowrap;
+    gap: 12px;
+    width: 100%;
+    max-width: none;
+    overflow-x: auto;
+    overflow-y: visible;
+    margin: 12px 0 0;
+    padding: 0 0 12px;
+    background: transparent;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .songStickyHeader > .sectionRail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sectionRail.liveSectionRail {
+    padding-bottom: 12px;
+  }
+
+  .songScreen .chartGrid {
+    padding-bottom: 24px;
+  }
+
+  .songScreen .floatingRepertoire {
+    bottom: 28px;
+    bottom: calc(28px + constant(safe-area-inset-bottom));
+    bottom: calc(28px + env(safe-area-inset-bottom));
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .editorLayout {
+    display: block;
+    max-width: 100%;
+  }
+
+  .editorPanel,
+  .editorPreview {
+    flex: none;
+    width: auto;
+    max-width: 100%;
+  }
+
+  .editorPreview {
+    margin-top: 22px;
+  }
+
+  .chartGrid {
+    display: block;
+    column-count: auto;
+    column-gap: 0;
+    width: 100%;
+    max-width: 920px;
+  }
+
+  .catalogHeader {
+    padding-top: 34px;
+  }
+
+  .catalogHeader h1,
+  .simpleHeader h1 {
+    margin-bottom: 22px;
+  }
+
+  .libraryHeader {
+    padding: 34px 30px 12px;
+  }
+
+  .libraryHeader h1 {
+    margin-bottom: 24px;
+    font-size: 25px;
+  }
+
+  .libraryCreateButton {
+    top: 24px;
+    right: 30px;
+  }
+
+  .librarySearchBox {
+    height: 54px;
+  }
+
+  .libraryTabs {
+    margin-top: 22px;
+  }
+
+  .libraryTab + .libraryTab {
+    margin-left: 14px;
+  }
+
+  .libraryTab {
+    min-width: 74px;
+    font-size: 16px;
+  }
+
+  .libraryContent {
+    padding: 22px 30px 24px;
+  }
+
+  .librarySongRow {
+    min-height: 88px;
+  }
+
+  .librarySongRow .cover {
+    width: 56px;
+    height: 56px;
+  }
+
+  .searchContent .cover {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+  }
+
+  .librarySongRow .songMeta strong {
+    font-size: 21px;
+  }
+
+  .appShell:not(.legacyVisualMode) .searchContent .songMeta strong {
+    font-size: 21px;
+  }
+
+  .legacyVisualMode .searchContent .songMeta strong {
+    font-size: 21px;
+  }
+
+  .legacyVisualMode .repertoireSongInfo strong {
+    font-size: 21px;
+  }
+
+  .librarySongRow .songMeta small {
+    display: block;
+  }
+
+  .songAddedCorner {
+    top: -6px;
+    left: -6px;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .songArtist {
+    display: none;
+  }
+
+  .artistRail,
+  .albumRail {
+    gap: 24px;
+  }
+
+  .artistCard {
+    width: 148px;
+    flex-basis: 148px;
+  }
+
+  .artistRail .artistPhoto {
+    width: 128px;
+    height: 128px;
+    font-size: 46px;
+  }
+
+  .albumCover {
+    width: 168px;
+    height: 168px;
+    flex-basis: 168px;
+  }
+
+  .settingsPanel {
+    top: 76px;
+    right: 18px;
+    width: 560px;
+    max-width: calc(100% - 36px);
+  }
+
+  .sectionCard {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding-top: 16px;
+  }
+
+  .sectionCard header {
+    position: static;
+    align-items: center;
+    height: auto;
+    min-height: 42px;
+    margin: 0 0 20px;
+  }
+
+  .sectionCard h2 {
+    background: transparent;
+  }
+
+  .floatingRepertoire {
+    bottom: 16px;
+  }
+}
+
+@media (max-width: 760px) {
+  .searchContent .songGrid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .searchContent .songRow {
+    min-height: 82px;
+    padding: 12px 0;
+  }
+
+  .repertoireDetailHero {
+    min-height: 190px;
+    padding: 18px 18px 24px;
+  }
+
+  .repertoireBackButton {
+    top: 18px;
+    left: 10px;
+  }
+
+  .repertoireEditButton {
+    top: 28px;
+    right: 18px;
+    font-size: 18px;
+  }
+
+  .repertoireHeroContent {
+    margin-top: 62px;
+  }
+
+  .repertoireCloudIcon {
+    top: 25px;
+  }
+
+  .repertoireHeroContent h1 {
+    font-size: 27px;
+  }
+
+  .repertoireHeroContent p {
+    font-size: 16px;
+  }
+
+  .repertoireDetailTabs {
+    height: 58px;
+  }
+
+  .repertoireDetailTabs button,
+  .repertoireDetailTabs span {
+    min-width: 180px;
+    font-size: 18px;
+  }
+
+  .repertoireSongScroll {
+    padding: 8px 18px 12px;
+  }
+
+  .repertoireSongRow {
+    min-height: 92px;
+    padding: 12px 0;
+  }
+
+  .repertoireEditAddBar {
+    padding: 14px 18px 16px;
+  }
+
+  .repertoireAddSongsButton {
+    font-size: 20px;
+  }
+
+  .repertoireAddSongsButton span {
+    width: 30px;
+    height: 30px;
+    margin-right: 12px;
+    font-size: 26px;
+  }
+
+  .repertoireRemoveSongButton {
+    flex-basis: 30px;
+    width: 30px;
+    height: 30px;
+    margin-right: 12px;
+    font-size: 26px;
+  }
+
+  .repertoireSongRow .cover {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+    font-size: 22px;
+  }
+
+  .repertoireSongInfo {
+    margin-left: 16px;
+  }
+
+  .repertoireSongInfo strong {
+    font-size: 20px;
+  }
+
+  .repertoireSongInfo small {
+    font-size: 17px;
+  }
+
+  .repertoireSongPreset {
+    display: none;
+  }
+
+  .repertoireSongKey {
+    flex-basis: 54px;
+  }
+
+  .repertoireOrderControls {
+    flex-basis: 34px;
+    gap: 14px;
+    margin-left: 8px;
+  }
+
+  .repertoireOrderControls button {
+    width: 32px;
+    height: 26px;
+    font-size: 28px;
+    line-height: 20px;
+  }
+
+  .openRepertoireButton {
+    min-width: 170px;
+    height: 40px;
+    margin: 8px auto 12px;
+    font-size: 16px;
+  }
+
+  .repertoireEditorTopbar {
+    grid-template-columns: minmax(72px, 1fr) auto minmax(72px, 1fr);
+    min-height: 70px;
+    padding: 10px 18px;
+  }
+
+  .repertoireEditorTopbar h1 {
+    font-size: 25px;
+  }
+
+  .textActionButton {
+    font-size: 16px;
+  }
+
+  .repertoireForm {
+    padding: 42px 18px 0;
+  }
+
+  .repertoireField {
+    font-size: 17px;
+  }
+
+  .repertoireFieldGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 26px;
+  }
+
+  .repertoireField + .repertoireField,
+  .repertoireFieldGrid + .repertoireField {
+    margin-top: 26px;
+  }
+
+  .repertoireField input {
+    height: 54px;
+    font-size: 17px;
+  }
+
+  .repertoireField textarea {
+    min-height: 120px;
+    font-size: 17px;
+  }
+
+  .libraryHeader {
+    padding: 26px 18px 10px;
+  }
+
+  .libraryHeader h1 {
+    margin-bottom: 20px;
+    font-size: 25px;
+  }
+
+  .libraryCreateButton {
+    position: static;
+    display: table;
+    box-sizing: border-box;
+    width: auto;
+    max-width: none;
+    margin: 0 auto 18px;
+    padding: 11px 18px;
+    font-size: 16px;
+  }
+
+  .libraryRepertoireContext {
+    margin: -4px 0 16px;
+    padding-bottom: 12px;
+  }
+
+  .libraryRepertoireIcon {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+    font-size: 18px;
+  }
+
+  .libraryRepertoireText strong {
+    font-size: 16px;
+  }
+
+  .libraryRepertoireText small {
+    font-size: 13px;
+  }
+
+  .librarySearchBox {
+    width: 100%;
+    max-width: none;
+    height: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0 20px;
+  }
+
+  .librarySearchBox input {
+    font-size: 19px;
+  }
+
+  .libraryTabs {
+    margin-top: 22px;
+  }
+
+  .libraryTab + .libraryTab {
+    margin-left: 10px;
+  }
+
+  .libraryTab {
+    min-width: 0;
+    padding: 8px 16px;
+    font-size: 16px;
+  }
+
+  .libraryContent {
+    padding: 18px 18px 20px;
+  }
+
+  .librarySongRow {
+    min-height: 82px;
+    padding: 12px 0;
+  }
+
+  .librarySongRow .cover {
+    width: 52px;
+    height: 52px;
+    font-size: 22px;
+  }
+
+  .searchContent .cover {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .librarySongRow .songMeta strong {
+    font-size: 20px;
+  }
+
+  .appShell:not(.legacyVisualMode) .searchContent .songMeta strong {
+    font-size: 20px;
+  }
+
+  .legacyVisualMode .searchContent .songMeta strong {
+    font-size: 20px;
+  }
+
+  .legacyVisualMode .repertoireSongInfo strong {
+    font-size: 20px;
+  }
+
+  .appShell:not(.legacyVisualMode) .librarySongRow .songMeta small {
+    font-size: 17px;
+  }
+
+  .librarySongRow .plusButton {
+    width: 34px;
+    flex-basis: 34px;
+    font-size: 30px;
+  }
+
+  .editorScreen {
+    padding: 18px 14px 34px;
+  }
+
+  .editorTopbar {
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .editorTopbar .primaryButton {
+    flex: 0 0 auto;
+    padding: 10px 14px;
+    border-radius: 12px;
+  }
+
+  .editorTopbar h1 {
+    min-width: 0;
+    overflow: hidden;
+    font-size: 25px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .editorPanel,
+  .editorPreview {
+    padding: 16px;
+  }
+
+  .fieldGrid label {
+    width: 100%;
+  }
+
+  .chartCodeEditor {
+    height: 320px;
+    min-height: 320px;
+  }
+
+  .chartCodeEditor .cm-editor {
+    font-size: 15px;
+  }
+
+  .previewChart,
+  .emptyPreview {
+    height: 320px;
+  }
+
+  .editorActions {
+    flex-direction: row;
+  }
+
+  .editorActions button {
+    width: auto;
+  }
+
+  .catalogHeader,
+  .simpleHeader {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .pills {
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .songRow {
+    min-width: 0;
+  }
+
+  .songScreen {
+    padding-top: 18px;
+    padding-right: 14px;
+    padding-left: 14px;
+    padding-bottom: 96px;
+  }
+
+  .repertoireLiveScreen {
+    padding: 14px 12px 38px;
+  }
+
+  .liveTopbar {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    min-height: 52px;
+    margin: -14px auto 0;
+    padding: 10px 0 6px;
+  }
+
+  .liveSongTitleButton {
+    justify-content: flex-start;
+    justify-self: start;
+    max-width: calc(100vw - 164px);
+    font-size: 20px;
+  }
+
+  .liveBackButton {
+    width: 40px;
+    height: 46px;
+  }
+
+  .liveActions {
+    gap: 6px;
+  }
+
+  .liveActions .keyButton,
+  .liveActions .iconButton {
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 17px;
+  }
+
+  .liveMoreButton {
+    font-size: 14px;
+  }
+
+  .sectionRail.liveSectionRail {
+    margin: 40px auto 24px;
+    padding-bottom: 12px;
+  }
+
+  .liveSongPicker {
+    width: 420px;
+  }
+
+  .liveSongPickerList button {
+    min-height: 76px;
+    padding: 10px 14px;
+  }
+
+  .liveSongPickerList .cover {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+    font-size: 19px;
+  }
+
+  .livePickerInfo strong {
+    font-size: 16px;
+  }
+
+  .livePickerKey {
+    flex-basis: 46px;
+  }
+
+  .songTopbar {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+  }
+
+  .songTopbar h1 {
+    justify-self: start;
+    max-width: calc(100vw - 120px);
+    font-size: 20px;
+    text-align: left;
+  }
+
+  .songTopbar > .iconButton.plain {
+    width: 40px;
+    height: 46px;
+  }
+
+  .iconButton,
+  .keyButton {
+    min-width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    font-size: 21px;
+  }
+
+  .iconButton.plain {
+    font-size: 38px;
+  }
+
+  .sectionRail {
+    gap: 14px;
+    margin: 22px 0 28px;
+    padding-bottom: 0;
+  }
+
+  .songScreen > .sectionRail {
+    margin: 22px auto 28px;
+  }
+
+  .sectionDot,
+  .sectionBadge {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+    border-width: 2px;
+    font-size: 15px;
+  }
+
+  .sectionCard {
+    margin-bottom: 20px;
+    padding-top: 16px;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .sectionCard header {
+    position: static;
+    align-items: center;
+    height: auto;
+    min-height: 42px;
+    margin: 0 0 20px;
+  }
+
+  .sectionCard h2 {
+    font-size: 18px;
+    letter-spacing: 3px;
+    margin-right: 8px;
+    margin-left: 10px;
+    padding-top: 0;
+    background: transparent;
+  }
+
+  .sectionCard small {
+    min-width: 0;
+    max-width: 36%;
+    padding-top: 0;
+    font-size: 15px;
+  }
+
+  .chordLine {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    margin-bottom: 14px;
+    overflow: visible;
+    font-size: 24px;
+  }
+
+  .chordText {
+    width: 100%;
+    font-size: 23px;
+    overflow-wrap: anywhere;
+    white-space: pre;
+  }
+
+  .chordLine.instrumental {
+    font-size: 23px;
+  }
+
+  .lyric {
+    width: 100%;
+    max-width: calc(100vw - 64px);
+    overflow: visible;
+    overflow-wrap: break-word;
+    font-size: 24px;
+    white-space: pre;
+  }
+
+  .searchBox {
+    height: 52px;
+    padding: 0 18px;
+  }
+
+  .searchBox input {
+    font-size: 19px;
+  }
+
+  .shelfTitle h2 {
+    font-size: 26px;
+  }
+
+  .shelfTitle button {
+    font-size: 18px;
+  }
+
+  .cover {
+    width: 64px;
+    height: 64px;
+    flex-basis: 64px;
+    font-size: 27px;
+  }
+
+  .songMeta strong {
+    font-size: 20px;
+  }
+
+  .songMeta small,
+  .artistCard small,
+  .repertoireCard small {
+    font-size: 17px;
+  }
+
+  .floatingRepertoire {
+    min-width: 170px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .bottomNav {
+    height: 68px;
+    padding: 0 6px;
+  }
+
+  .bottomNav button {
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .bottomNav span {
+    font-size: 24px;
+  }
+
+  .appShell:not(.legacyVisualMode) .bottomNav button {
+    font-size: 17px;
+  }
+
+  .appShell:not(.legacyVisualMode) .bottomNav span {
+    font-size: 30px;
+  }
+
+  .masterPanel {
+    padding-top: 74px;
+  }
+
+  .masterSummary {
+    justify-content: center;
+    padding-bottom: 4px;
+  }
+
+  .masterStat {
+    min-width: 92px;
+  }
+
+  .masterUserRow {
+    align-items: flex-start;
+  }
+
+  .masterUserBadges {
+    display: block;
+    margin-left: 10px;
+    text-align: right;
+  }
+
+  .masterBadge {
+    margin: 0 0 6px 5px;
+  }
+
+  .settingsPanel {
+    top: 58px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    max-width: none;
+    max-height: calc(100vh - 84px);
+  }
+
+  .settingsPanel header {
+    padding: 24px 22px;
+  }
+
+  .settingsPanel h2 {
+    font-size: 23px;
+  }
+
+  .settingsPanel header button {
+    font-size: 20px;
+  }
+
+  .settingsBody {
+    max-height: calc(100vh - 184px);
+    padding: 22px;
+  }
+
+  .selectLike {
+    height: 60px;
+    padding: 0 18px;
+    font-size: 22px;
+  }
+
+  .settingsBody label {
+    font-size: 18px;
+  }
+
+  .settingsBody label strong {
+    display: block;
+    margin: 4px 0 0;
+  }
+
+  .keyPicker button,
+  .accidentals button {
+    min-height: 56px;
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 430px) {
+  .songGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .libraryHeader,
+  .libraryContent {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .libraryTabs {
+    justify-content: center;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .librarySearchBox {
+    width: 100%;
+    max-width: none;
+  }
+
+  .librarySongRow {
+    min-height: 78px;
+  }
+
+  .librarySongRow .cover {
+    width: 50px;
+    height: 50px;
+  }
+
+  .searchContent .cover {
+    width: 50px;
+    height: 50px;
+    flex-basis: 50px;
+  }
+
+  .searchContent .songMeta {
+    margin-right: 12px;
+    margin-left: 10px;
+  }
+
+  .librarySongRow .songMeta {
+    margin-right: 12px;
+    margin-left: 10px;
+  }
+
+  .librarySongRow .songMeta strong {
+    font-size: 19px;
+  }
+
+  .appShell:not(.legacyVisualMode) .searchContent .songMeta strong {
+    font-size: 19px;
+  }
+
+  .legacyVisualMode .searchContent .songMeta strong {
+    font-size: 19px;
+  }
+
+  .legacyVisualMode .repertoireSongInfo strong {
+    font-size: 19px;
+  }
+
+  .editorScreen {
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  .editorTopbar {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    width: calc(100vw - 28px);
+    max-width: calc(100vw - 28px);
+  }
+
+  .editorTopbar .iconButton {
+    min-width: 42px;
+    width: 42px;
+  }
+
+  .editorTopbar h1 {
+    text-align: center;
+  }
+
+  .editorLayout,
+  .editorPanel,
+  .editorPreview {
+    width: auto;
+    max-width: none;
+  }
+
+  .catalogHeader,
+  .simpleHeader,
+  .catalogContent {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .simpleHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .primaryButton {
+    width: 100%;
+  }
+
+  .libraryCreateButton {
+    width: auto;
+    box-sizing: border-box;
+    max-width: none;
+  }
+
+  .editorTopbar .primaryButton {
+    width: auto;
+  }
+
+  .songMeta {
+    margin-left: 14px;
+  }
+
+  .plusButton {
+    width: 34px;
+    flex-basis: 34px;
+  }
+
+  .floatingRepertoire {
+    bottom: 14px;
+  }
+
+  .sectionCard {
+    padding-top: 14px;
+    padding-right: 12px;
+    padding-left: 12px;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 18px;
+  }
+
+  .sectionCard header {
+    position: static;
+  }
+
+  .sectionCard h2 {
+    letter-spacing: 2px;
+  }
+
+  .chordLine {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    margin-bottom: 14px;
+    overflow: visible;
+    font-size: 24px;
+  }
+
+  .chordText {
+    width: 100%;
+    font-size: 23px;
+    overflow-wrap: anywhere;
+    white-space: pre;
+  }
+
+  .chordLine.instrumental {
+    font-size: 23px;
+  }
+
+  .lyric {
+    width: 100%;
+    max-width: calc(100vw - 56px);
+    overflow: visible;
+    overflow-wrap: break-word;
+    font-size: 24px;
+    white-space: pre;
+  }
+
+  .artistCard {
+    width: 132px;
+    flex-basis: 132px;
+  }
+
+  .artistRail .artistPhoto {
+    width: 112px;
+    height: 112px;
+  }
+
+  .albumCover {
+    width: 148px;
+    height: 148px;
+    flex-basis: 148px;
+  }
+}
+
+@media (max-width: 360px) {
+  .bottomNav button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 900px) {
+  .appShell:not(.legacyVisualMode) .bottomNav {
+    background: #0d0f10;
+  }
+
+  .bottomNav {
+    height: 78px;
+    height: calc(78px + constant(safe-area-inset-bottom));
+    height: calc(78px + env(safe-area-inset-bottom));
+    padding: 0 8px 10px;
+    padding-bottom: calc(10px + constant(safe-area-inset-bottom));
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  }
+
+  .catalogScreen,
+  .repertoireScreen,
+  .libraryScreen,
+  .repertoireDetailScreen {
+    padding-bottom: 78px;
+    padding-bottom: calc(78px + constant(safe-area-inset-bottom));
+    padding-bottom: calc(78px + env(safe-area-inset-bottom));
+  }
+
+  .repertoireDetailScreen .openRepertoireButton {
+    position: fixed;
+    right: auto;
+    bottom: 88px;
+    bottom: calc(88px + constant(safe-area-inset-bottom));
+    bottom: calc(88px + env(safe-area-inset-bottom));
+    left: 50%;
+    z-index: 31;
+    margin: 0;
+    transform: translateX(-50%);
+  }
+
+  .repertoireDetailScreen .repertoireSongScroll {
+    padding-bottom: 66px;
+  }
+
+  .editorScreen {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .editorTopbar {
+    position: relative;
+    z-index: 20;
+    -webkit-flex: 0 0 auto;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    min-height: 70px;
+    margin: 0;
+    padding: 10px 14px;
+    background: #1a1c1d;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .editorLayout {
+    position: relative;
+    z-index: 1;
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+    padding: 18px 14px 34px;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .repertoireLiveScreen {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .liveTopbar {
+    position: relative;
+    top: auto;
+    z-index: 20;
+    -webkit-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: none;
+    min-height: 52px;
+    margin: 0;
+    padding: 14px 12px 6px;
+    background: #1a1c1d;
+  }
+
+  .sectionRail.liveSectionRail {
+    position: relative;
+    z-index: 20;
+    -webkit-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 6px 12px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: #1a1c1d;
+  }
+
+  .liveChartViewport {
+    position: relative;
+    z-index: 1;
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 22px 12px 20px;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .livePageDots {
+    position: relative;
+    bottom: auto;
+    z-index: 14;
+    -webkit-flex: 0 0 auto;
+    flex: 0 0 auto;
+    margin: 0 auto 10px;
+  }
+
+  .songScreen {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .songStickyHeader {
+    position: relative;
+    z-index: 24;
+    -webkit-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 14px 12px 12px;
+    background: #1a1c1d;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .songChartViewport {
+    position: relative;
+    z-index: 1;
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 22px 12px 118px;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .songStickyHeader .songTopbar {
+    position: static;
+    grid-template-columns: 34px minmax(0, 1fr) 46px;
+    gap: 8px;
+    min-height: 52px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+  }
+
+  .songStickyHeader .songTopbar > .iconButton.plain {
+    width: 34px;
+    min-width: 34px;
+    height: 42px;
+  }
+
+  .songStickyHeader .songTopbar h1 {
+    justify-self: start;
+    max-width: calc(100vw - 112px);
+    font-size: 18px;
+    text-align: left;
+  }
+
+  .songStickyHeader > .sectionRail {
+    position: static;
+    flex-wrap: nowrap;
+    gap: 12px;
+    width: 100%;
+    max-width: none;
+    overflow-x: auto;
+    overflow-y: visible;
+    margin: 12px 0 0;
+    padding: 0 0 12px;
+    background: transparent;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .songStickyHeader > .sectionRail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .songScreen .floatingRepertoire {
+    bottom: 28px;
+    bottom: calc(28px + constant(safe-area-inset-bottom));
+    bottom: calc(28px + env(safe-area-inset-bottom));
+    text-decoration: none;
+  }
+
+  .libraryContent {
+    padding-bottom: 0;
+  }
+}
+
+.appShell:not(.legacyVisualMode) .songTopbar > .iconButton.plain,
+.appShell:not(.legacyVisualMode) .liveBackButton {
+  justify-content: flex-start;
+  justify-content: left;
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 44px;
+}
+
+@media (max-width: 900px) {
+  .appShell:not(.legacyVisualMode) .songStickyHeader .songTopbar {
+    grid-template-columns: 34px minmax(0, 1fr) 46px;
+    gap: 6px;
+  }
+
+  .appShell:not(.legacyVisualMode) .songStickyHeader .songTopbar > .iconButton.plain {
+    width: 34px;
+    min-width: 34px;
+  }
+
+  .appShell:not(.legacyVisualMode) .songStickyHeader .songTopbar h1 {
+    justify-self: start;
+    max-width: calc(100vw - 106px);
+    font-size: 20px;
+    text-align: left;
+  }
+
+  .appShell:not(.legacyVisualMode) .liveTopbar {
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 6px;
+  }
+
+  .appShell:not(.legacyVisualMode) .liveBackButton {
+    width: 34px;
+  }
+
+  .appShell:not(.legacyVisualMode) .liveSongTitleButton {
+    justify-content: flex-start;
+    justify-self: start;
+    max-width: calc(100vw - 160px);
+    font-size: 20px;
+  }
+
+  .appShell:not(.legacyVisualMode) .sectionRail.liveSectionRail {
+    padding-bottom: 24px;
+  }
+}
+
+@media (min-width: 901px) {
+  .appShell:not(.legacyVisualMode) .songScreen {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
+    padding: 28px 24px 0;
+  }
+
+  .appShell:not(.legacyVisualMode) .songStickyHeader {
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 24;
+    margin: 0 auto 0;
+  }
+
+  .appShell:not(.legacyVisualMode) .songStickyHeader > .sectionRail {
+    gap: 15px;
+    margin: 15px auto 0;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+  }
+
+  .appShell:not(.legacyVisualMode) .songChartViewport {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 22px 12px 20px;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .appShell:not(.legacyVisualMode) .repertoireLiveScreen {
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
+    padding: 18px 24px 18px;
+  }
+
+  .appShell:not(.legacyVisualMode) .liveTopbar,
+  .appShell:not(.legacyVisualMode) .sectionRail.liveSectionRail,
+  .appShell:not(.legacyVisualMode) .livePageDots {
+    flex: 0 0 auto;
+  }
+
+  .appShell:not(.legacyVisualMode) .sectionRail.liveSectionRail {
+    gap: 15px;
+    margin: 15px auto 0;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .appShell:not(.legacyVisualMode) .livePageDots {
+    bottom: 0;
+  }
+
+  .appShell:not(.legacyVisualMode) .liveTopbar {
+    position: relative;
+  }
+
+  .appShell:not(.legacyVisualMode) .liveChartViewport {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 22px 12px 20px;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+html.legacyVisualRoot,
+body.legacyVisualRoot {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+  background: #1c1e20;
+}
+
+html.legacyVisualRoot #root,
+.legacyVisualMode {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: #1c1e20;
+}
+
+.legacyVisualMode .libraryScreen,
+.legacyVisualMode .searchScreen,
+.legacyVisualMode .repertoireScreen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: auto;
+  min-height: 0;
+  padding-bottom: 78px;
+  overflow: hidden;
+  background: #1c1e20;
+}
+
+.legacyVisualMode .repertoireDetailScreen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: auto;
+  min-height: 0;
+  padding-bottom: 78px;
+  overflow: hidden;
+}
+
+.legacyVisualMode .libraryHeader {
+  position: relative;
+  z-index: 2;
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+  background: #1c1e20;
+}
+
+.legacyVisualMode .libraryContent {
+  position: relative;
+  z-index: 1;
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  height: 0;
+  min-height: 0;
+  padding-bottom: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: #1c1e20;
+  -webkit-overflow-scrolling: auto;
+}
+
+.legacyVisualMode .bottomNav {
+  position: absolute;
+  height: 78px;
+  padding: 0 8px 10px;
+}
+
+.legacyVisualMode .repertoireDetailTabs button,
+.legacyVisualMode .repertoireDetailTabs span {
+  display: inline-block;
+  padding: 0;
+  line-height: 66px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.legacyVisualMode .accountForm {
+  display: -webkit-flex;
+  display: flex;
+  gap: 0;
+}
+
+.legacyVisualMode .accountForm label {
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.legacyVisualMode .accountForm label:last-of-type {
+  margin-bottom: 0;
+}
+
+.legacyVisualMode .accountPrimaryButton {
+  margin-top: 28px;
+  font-size: 15px;
+}
+
+.legacyVisualMode .accountError {
+  width: 100%;
+  margin: 10px 0 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.appShell.legacyVisualMode .accountModeButton {
+  display: none !important;
+}
+
+.legacyVisualMode .librarySongRow .cover,
+.legacyVisualMode .searchContent .cover {
+  display: block;
+  padding: 0;
+  text-align: center;
+  line-height: 64px;
+}
+
+@media (min-width: 761px) and (max-width: 900px) {
+  .appShell:not(.legacyVisualMode) .sectionRail.liveSectionRail {
+    gap: 15px;
+  }
+}
+
+.legacyVisualMode .songStickyHeader .songTopbar {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  width: 100%;
+}
+
+.legacyVisualMode .songStickyHeader .songTopbar > .iconButton.plain {
+  -webkit-flex: 0 0 34px;
+  flex: 0 0 34px;
+  margin-right: 8px;
+  padding: 0;
+}
+
+.legacyVisualMode .songStickyHeader .songTopbar h1 {
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  font-size: 20px;
+  text-align: left;
+}
+
+.legacyVisualMode .songStickyHeader .songActions {
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+  min-width: 0;
+  margin-left: 8px;
+}
+
+.legacyVisualMode .songStickyHeader > .sectionRail {
+  display: -webkit-flex;
+  display: flex;
+  gap: 0;
+}
+
+.legacyVisualMode .songStickyHeader > .sectionRail .sectionDot {
+  display: block;
+  -webkit-flex: 0 0 48px;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  line-height: 42px;
+  text-align: center;
+  text-indent: 0;
+}
+
+.legacyVisualMode .songStickyHeader > .sectionRail .sectionDot:last-child {
+  margin-right: 0;
+}
+
+.legacyVisualMode .liveTopbar {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  min-height: 52px;
+  margin: 0;
+  padding: 14px 12px 0;
+  background: #1a1c1d;
+}
+
+.legacyVisualMode .liveBackButton {
+  -webkit-flex: 0 0 30px;
+  flex: 0 0 30px;
+  width: 30px;
+  min-width: 30px;
+  height: 42px;
+  margin-right: 4px;
+  padding: 0;
+}
+
+.legacyVisualMode .liveSongTitleButton {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  font-size: 20px;
+  text-align: left;
+}
+
+.legacyVisualMode .liveSongTitleButton span {
+  display: block;
+  min-width: 0;
+}
+
+.legacyVisualMode .liveSongTitleButton small {
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.legacyVisualMode .liveActions {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+  min-width: 0;
+  margin-left: 8px;
+}
+
+.legacyVisualMode .liveActions .keyButton,
+.legacyVisualMode .liveActions .iconButton {
+  -webkit-flex: 0 0 52px;
+  flex: 0 0 52px;
+  width: 52px;
+  min-width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  margin-left: 6px;
+  padding: 0;
+  font-size: 24px;
+  line-height: 52px;
+  text-align: center;
+}
+
+.legacyVisualMode .liveActions .liveMoreButton {
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+
+.legacyVisualMode .sectionRail.liveSectionRail {
+  display: -webkit-flex;
+  display: flex;
+  box-sizing: border-box;
+  gap: 0;
+  width: 100%;
+  max-width: none;
+  margin: 12px 0 0;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 0 12px 26px;
+  background: #1a1c1d;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.legacyVisualMode .sectionRail.liveSectionRail .sectionDot {
+  display: block;
+  -webkit-flex: 0 0 48px;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  line-height: 42px;
+  text-align: center;
+  text-indent: 0;
+}
+
+.legacyVisualMode .sectionRail.liveSectionRail .sectionDot:last-child {
+  margin-right: 0;
+}
+
+.legacyVisualMode .livePageDots {
+  display: block;
+  text-align: center;
+}
+
+.legacyVisualMode .livePageDots button {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.legacyVisualMode .livePageDots button:last-child {
+  margin-right: 0;
+}
+
+.legacyVisualMode .liveSongPicker {
+  display: -webkit-flex;
+  display: flex;
+  height: calc(100% - 108px);
+  max-height: none;
+}
+
+.legacyVisualMode .liveSongPickerList {
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  height: 0;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.legacyVisualMode .artistRail {
+  gap: 0;
+}
+
+.legacyVisualMode .artistRail .artistCard {
+  -webkit-flex: 0 0 180px;
+  flex: 0 0 180px;
+  width: 180px;
+  margin-right: 20px;
+  overflow: visible;
+}
+
+.legacyVisualMode .artistRail .artistCard:last-child {
+  margin-right: 0;
+}
+
+@media (max-width: 1180px) {
+  .legacyVisualMode .librarySongRow .cover,
+  .legacyVisualMode .searchContent .cover {
+    line-height: 60px;
+  }
+}
+
+@media (max-width: 900px) {
+  .legacyVisualMode .artistRail .artistCard {
+    -webkit-flex-basis: 132px;
+    flex-basis: 132px;
+    width: 132px;
+    margin-right: 16px;
+  }
+
+  .legacyVisualMode .artistRail .artistPhoto {
+    width: 112px;
+    height: 112px;
+    font-size: 40px;
+  }
+
+  .legacyVisualMode .librarySongRow .cover,
+  .legacyVisualMode .searchContent .cover {
+    line-height: 56px;
+  }
+
+  .legacyVisualMode .repertoireDetailTabs button,
+  .legacyVisualMode .repertoireDetailTabs span {
+    line-height: 58px;
+  }
+}
+
+@media (max-width: 760px) {
+  .legacyVisualMode .artistRail .artistCard {
+    -webkit-flex-basis: 116px;
+    flex-basis: 116px;
+    width: 116px;
+    margin-right: 14px;
+  }
+
+  .legacyVisualMode .artistRail .artistPhoto {
+    width: 100px;
+    height: 100px;
+    font-size: 36px;
+  }
+
+  .legacyVisualMode .librarySongRow .cover,
+  .legacyVisualMode .searchContent .cover {
+    line-height: 52px;
+  }
+}
+
+@media (max-width: 430px) {
+  .legacyVisualMode .librarySongRow .cover,
+  .legacyVisualMode .searchContent .cover {
+    line-height: 50px;
+  }
+}

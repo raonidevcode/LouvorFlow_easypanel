@@ -1,0 +1,19 @@
+{
+  "name": "LouvorFlow",
+  "short_name": "LouvorFlow",
+  "description": "Cifras, biblioteca e repertorios para equipes de louvor.",
+  "start_url": "/#library",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#181a1c",
+  "theme_color": "#181a1c",
+  "icons": [
+    {
+      "src": "/icons/louvorflow-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
