@@ -17,6 +17,9 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    allowedHosts: [
+      '://hawkstecnologia.com.br'
+    ],
     proxy: {
       "/api": {
         target: "http://127.0.0.1:3333",
@@ -42,3 +45,4 @@ export default defineConfig({
     }
   }
 });
+
